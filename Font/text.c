@@ -1,6 +1,8 @@
 /*
     Coded by ArTic/JhoPro
 
+    Extension by nicolasbickhoff11
+
     Here we have some implementations of drawing the characters on 
     the screen, and some functions to draw strings, integers, and hex.
 */
@@ -9,6 +11,8 @@
 #include "../Graphics/graphics.h"
 #include "../Userspace/GUI/win.h"
 #include "../Shell/shell.h"
+
+#include "../Hardware/serial.h"
 
 //Change fonts here
 #include "text.h"
@@ -70,10 +74,15 @@ void DrawChar(BYTE* bitmap, DWORD color)
     
 }
 
+extern int inGUI;
+
 void Print(const char* str, DWORD color)
 {
     for (int i = 0; str[i] != '\0'; i++)
     {
+	if (!inGUI)
+            com1PutChar(str[i]);
+
         //If its '\n' goest to the next line.
         if (str[i] == '\n')
         {
@@ -98,7 +107,7 @@ void Print(const char* str, DWORD color)
             {
                 cursorX -= 16;
                 DrawChar(isoFont + 0 * GLYPH_SIZE, 0);
-                
+
                 //Returns again because DrawChar update cursor
                 // automatically
                 cursorX -= 8;
@@ -120,6 +129,53 @@ void Print(const char* str, DWORD color)
         //DrawChar(isoFont + str[i] * HFONT * (WFONT / 8), color);
         DrawChar(isoFont + (unsigned char)str[i] * GLYPH_SIZE, color);
     }
+}
+
+void fbPutChar(char character) {
+    if (character == '\n')
+    {
+       if (shellNOGUI)
+       {
+           cursorX = 0;
+           cursorY += HFONT;
+       }
+       if (!shellNOGUI)
+       {
+           cursorX = winshellX;
+           cursorY += HFONT;
+           //shellNOGUI = 1;
+       }
+
+       return;
+    }
+    if (character == '\b')
+    {
+        if (cursorX > 0)
+        {
+            cursorX -= 16;
+            DrawChar(isoFont + 0 * GLYPH_SIZE, 0xFFFFFFFF);
+
+            //Returns again because DrawChar update cursor
+            // automatically
+            cursorX -= 8;
+
+            return;
+        }
+    }
+
+    if (character == '\f')
+    {
+        DrawChar(isoFont + 0xDB * GLYPH_SIZE, 0xFFFFFFFF);
+
+        return;
+    }
+
+    DrawChar(isoFont + (unsigned char)character * GLYPH_SIZE, 0xFFFFFFFF);
+}
+
+void PutChar(char character) {
+    fbPutChar(character);
+    com1PutChar(character);
 }
 
 //Just for debugging code
@@ -206,6 +262,9 @@ void PrintHex(int value, DWORD color)
 //Thats our custom DrawChar, but with ASCII data
 void PrintOut(char letter, DWORD color)
 {
+    if (!inGUI)
+        com1PutChar(letter);
+
     if (letter == '\b')
     {
         if (cursorX >= WFONT)

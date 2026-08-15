@@ -22,6 +22,8 @@
 #include "../Hardware/pci.h"
 #include "../Hardware/disk.h"
 #include "../Hardware/cmos.h"
+// extension by nicolasbickhoff11
+#include "../Hardware/serial.h"
 #include "../FileSystem/memfs.h"
 //#include "../FileSystem/tarhdr.h"
 #include "../Shell/shell.h"
@@ -31,6 +33,10 @@
 //#include "../Include/gif.h"
 #include "../Userspace/userspace.h"
 #include "../GDT/gdt.h"
+
+// expanded by nicolasbickhoff11
+#include "../Font/printf.h"
+#include "../Timer/timer.h"
 
 /*
 static DWORD OctalToInt(char* str)
@@ -102,6 +108,8 @@ void main(struct multiboot_info* mbinfo, DWORD addr)
 
     InitVirtualMemory();
     Debug("Virtual Memory Manager Started!\n", 0x00);
+
+    printf("TEST from printf, values: %d, %s, %lx, %lX\n", 10, "Test from printf", 0xDEADBEEF, 0xDEADBEBE);
 
     DWORD aligned = (mbinfo->mods_addr + 3) & ~3;
     //struct multiboot_module_t* mods = (struct multiboot_module_t*) mbinfo->mods_addr;
