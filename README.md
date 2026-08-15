@@ -49,6 +49,8 @@ https://github.com/user-attachments/assets/696a708d-3408-4850-8edd-a12c05431517
 - ✅ **Audio Driver**
 - ✅ **OpenGL-like API**
 - ✅ **DOOM**
+- ✅ **Serial Support**
+- ✅ **Printf Support**
 - 🚧 **Integrated Development Environment (IDE)**
 - ❌ **C/C++ Compiler**
 - ❌ **POSIX-like**
@@ -62,6 +64,7 @@ https://github.com/user-attachments/assets/696a708d-3408-4850-8edd-a12c05431517
 - 🚧 Kernel to Shell Transition
 - 🚧 More Applications
 - 🚧 Window Buffers
+- 🚧 Printf Transition
 
 # ⚙️ Building
 ### 🧰 Necessary Components
