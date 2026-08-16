@@ -36,7 +36,6 @@
 
 // expanded by nicolasbickhoff11
 #include "../Font/printf.h"
-#include "../Timer/timer.h"
 
 /*
 static DWORD OctalToInt(char* str)
