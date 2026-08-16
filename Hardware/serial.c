@@ -4,7 +4,7 @@
 #include "../Include/stdint.h"
 #include "../Include/ports.h"
 
-void initSerial() {
+void InitSerial() {
     outb(PORT + 1, 0x00);    // Disable all interrupts
     outb(PORT + 3, 0x80);    // Enable DLAB
     outb(PORT + 0, 0x03);    // Divisor lo byte (38400 baud)
