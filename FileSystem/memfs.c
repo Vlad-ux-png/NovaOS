@@ -1,6 +1,8 @@
 /*
     Coded by ArTic/JhoPro
 
+    Extension by nicolasbickhoff11
+
     A RAM File system implementation. It's very simple and useful
     We can create files, directories, etc.
 */
@@ -382,7 +384,7 @@ void PrintCurrentDir()
 
 //#if 0
 
-void RunProgram(char* filename)
+/*void RunProgram(char* filename)
 {
     for (int i = 0; filename[i]; i++)
     {
@@ -434,6 +436,7 @@ void RunProgram(char* filename)
 
     entry();
 }
+*/
 
 //#endif
 
