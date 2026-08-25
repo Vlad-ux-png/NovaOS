@@ -29,7 +29,6 @@ void InitFileSystem()
 
     fs->root.parent = NULL;
 
-    // 🔥 alinhado
     fs->root.nextFreeBlock = (FSADDRESS + sizeof(FileSystem) + 3) & ~3;
 
     currentDir = &fs->root;
