@@ -53,7 +53,6 @@ int CreateFile(const char* filename, const LPBYTE data, DWORD size, BYTE permiss
     if (fileIndex == -1)
         return -2;
 
-    // 🔥 ALIGN (ESSENCIAL)
     DWORD dataOffset = (currentDir->nextFreeBlock + 3) & ~3;
 
     currentDir->nextFreeBlock = dataOffset + size;
@@ -245,7 +244,6 @@ int MakeDir(const char* dir)
     {
         if (currentDir->subdirs[i] == NULL)
         {
-            // 🔥 ALIGN
             DWORD addr = (currentDir->nextFreeBlock + 3) & ~3;
 
             Directory* newDir = (Directory*) addr;
