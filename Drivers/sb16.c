@@ -19,7 +19,14 @@ void ResetSoundBlaster()
 
 void WriteDSP(BYTE cmd)
 {
-    while ((inb(0x22C) & 0x80) != 0x00);
+    unsigned int timeout = 100000;
+    
+    while ((inb(0x22C) & 0x80) != 0x00) {
+        if (--timeout == 0) {
+            return; 
+        }
+    }
+    
     outb(0x22C, cmd);
 }
 
