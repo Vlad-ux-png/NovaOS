@@ -20,7 +20,8 @@ jobs:
             nasm \
             grub-pc \
             grub2-common \
-            xorriso
+            xorriso \
+            mtools
 
       - name: Build OS iso
         run: |
