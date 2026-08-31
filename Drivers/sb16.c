@@ -1,5 +1,5 @@
 /*
-    Coded by ArTic/JhoPro
+    Coded by ArTic/JhoPro, Vlad-ux-png
 
     A Sound Blaster 16 Audio Driver Implementation
 */
